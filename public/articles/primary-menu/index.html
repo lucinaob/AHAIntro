@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=4321&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.139.3">
+
+
+<title>3. Primary Menu - Personal Digital Garden</title>
+<meta property="og:title" content="3. Primary Menu - Personal Digital Garden">
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/%3cnil%3e"
+         width=""
+         height=""
+         alt="">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="">About</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">3. Primary Menu</h1>
+
+    
+
+    <div class="article-content">
+      
+      <p>The sidebar of the theme uses the <code>main</code> menu. Add all the items for your sidebar navigation in this menu.</p>
+<p>// config.toml</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[menu]
+</span></span><span style="display:flex;"><span>[[menu.main]]
+</span></span><span style="display:flex;"><span>  name = <span style="color:#f1fa8c">&#39;Home&#39;</span>
+</span></span><span style="display:flex;"><span>  url = <span style="color:#f1fa8c">&#39;/&#39;</span>
+</span></span><span style="display:flex;"><span>  weight = <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>[[menu.main]]
+</span></span><span style="display:flex;"><span>  name = <span style="color:#f1fa8c">&#39;Content&#39;</span>
+</span></span><span style="display:flex;"><span>  params.header = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>  weight = <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>[[menu.main]]
+</span></span><span style="display:flex;"><span>  name = <span style="color:#f1fa8c">&#39;Articles&#39;</span>
+</span></span><span style="display:flex;"><span>  url = <span style="color:#f1fa8c">&#39;/articles&#39;</span>
+</span></span><span style="display:flex;"><span>  weight = <span style="color:#bd93f9">3</span>
+</span></span></code></pre></div><ul>
+<li><code>name</code> → Title of the menu item</li>
+<li><code>url</code> → Path to navigate</li>
+<li><code>weight</code> → Used to decide the order of menu items</li>
+<li><code>params.header</code> → Display menu item as header</li>
+</ul>
+<p>If the link points to an external website, the external icon is already displayed.</p>
+<p>Using JSON or YAML formats? Check out the <a href="https://gohugo.io/content-management/menus/#simple">menu</a> documentation.</p>
+<p>→ <a href="/articles/social-menu">Configure Social Menu</a></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js//highlight.min.js"></script>
+
+
+
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

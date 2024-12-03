@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=4321&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.139.3">
+
+
+<title>1. Theme Installation - Personal Digital Garden</title>
+<meta property="og:title" content="1. Theme Installation - Personal Digital Garden">
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/%3cnil%3e"
+         width=""
+         height=""
+         alt="">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="">About</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">1. Theme Installation</h1>
+
+    
+
+    <div class="article-content">
+      
+      <p>Create a new hugo website or open your existing hugo site.</p>
+<h4 id="add-the-theme-to-your-hugo-site">Add the theme to your hugo site</h4>
+<p>Use as a git submodule:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git submodule add https://github.com/apvarun/digital-garden-hugo-theme.git themes/digitalgarden
+</span></span></code></pre></div><p>Clone the repository (one-off, updating the theme may be harder later):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone https://github.com/apvarun/digital-garden-hugo-theme.git themes/digitalgarden
+</span></span></code></pre></div><h4 id="setup">Setup</h4>
+<ol>
+<li>Copy <code>package.json</code>, <code>package-lock.json</code> and <code>tailwind.config.js</code> files from the theme/digitalgarden folder to the root folder of your the website</li>
+<li>Run <code>npm install</code> to install required packages for theme</li>
+<li>Run <code>npm i -g postcss-cli</code> to use PostCSS with Hugo build</li>
+<li>Set <code>theme = 'digitalgarden'</code> in config.toml</li>
+<li>Run <code>npm run dev</code> to start your local server</li>
+</ol>
+<p>When deploying to services like Netlify or Vercel, use the following command for building your site:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>npm i -g postcss-cli <span style="color:#ff79c6">&amp;&amp;</span> npm run build
+</span></span></code></pre></div><p>→ <a href="/articles/structure">Understanding the theme structure</a></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js//highlight.min.js"></script>
+
+
+
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

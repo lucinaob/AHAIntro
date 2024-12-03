@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=4321&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.139.3">
+
+
+<title>5. Newsletter - Personal Digital Garden</title>
+<meta property="og:title" content="5. Newsletter - Personal Digital Garden">
+
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/%3cnil%3e"
+         width=""
+         height=""
+         alt="">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="">About</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">5. Newsletter</h1>
+
+    
+
+    <div class="article-content">
+      
+      <p>The theme supports a subscription to multiple newsletter providers.</p>
+<ul>
+<li><strong>Buttondown</strong></li>
+<li><strong>Substack</strong></li>
+<li><strong>Revue</strong></li>
+</ul>
+<h2 id="buttondown">Buttondown</h2>
+<p>[Params.newsletter.provider] = &ldquo;buttondown&rdquo;</p>
+<p>Copy the <code>action</code> url from your buttondown admin dashboard and add it to <strong>[Params.newsletter.path]</strong> in config.toml</p>
+<p><img src="https://blog.buttondown.email/img/9.png" alt="Buttondown share form URL"></p>
+<h2 id="substack">Substack</h2>
+<p>[Params.newsletter.provider] = &ldquo;substack&rdquo;</p>
+<p>Setting up substack is the easiest. Just add your substack newsletter URL (applicable for custom domains also) to <strong>[Params.newsletter.path]</strong> in config.toml</p>
+<p>Note that since substack doesn&rsquo;t have a native API for subscription. The theme uses the api from substackapi.com which is in no way associated to Substack itself.</p>
+<h2 id="revue">Revue</h2>
+<p>Add your revue <code>username</code> URL to <code>Params.newsletter.path</code> in your config.toml. Once done, the newsletter widget will start showing up in website&rsquo;s sidebar, allowing your visitors to subscribe to your newsletter.</p>
+<h4 id="how-to-find-your-revue-url-to-use">How to find your Revue URL to use</h4>
+<p>Login to your Revue account and go to to <code>Account Settings</code>, then the <code>Integrations</code> tab. Scroll to the bottom, and click on <code>Learn more</code> in <strong>Signup forms</strong> section.</p>
+<p><img src="https://downloads.intercomcdn.com/i/o/304891471/587879182e5d9d19aff97d2f/Screenshot+2021-02-26+at+9.10.32+AM.png" alt="Revue signup forms"></p>
+<p>In the next page, you can find the add_subscriber URL.</p>
+<p><img src="https://github.com/apvarun/digital-garden-hugo-theme/blob/main/images/revue-signup-form-url.png?raw=true" alt="Revue URL"></p>
+<p>Copy it and use in <code>config.toml</code>.</p>
+<p>→ <a href="/articles/google-analytics">Add Google analytics</a></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+  </body>
+</html>
+

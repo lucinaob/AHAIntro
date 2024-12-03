@@ -1,0 +1,31 @@
+baseURL: /
+languageCode: en-us
+title: Personal Digital Garden
+theme: "apvarun/digital-garden-hugo-theme"
+googleAnalytics: UA-PROPERTY_ID
+Params:
+  description: My Digital Garden on the Internet
+  enableSearch: yes
+  images: /digital-garden-logo.png
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 1
+    - name: About
+      params:
+        header: yes
+      weight: 2
+  social:
+    - name: GitHub
+      url: https://github.com
+      weight: 1
+    - name: Email
+      url: mailto:lfobrien@smith.edu
+      weight: 2
+markup:
+  goldmark:
+    renderer:
+      unsafe: yes
+  highlight:
+    style: dracula

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AHA Visualization Project on Personal Digital Garden</title>
+    <link>http://localhost:4321/</link>
+    <description>Recent content in AHA Visualization Project on Personal Digital Garden</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
+    <atom:link href="http://localhost:4321/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:4321/about/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      <guid>http://localhost:4321/about/</guid>
+      <description>&lt;p&gt;This site was developed by Lucy O&amp;rsquo;Brien, Smith class of 2026.&lt;/p&gt;&#xA;&lt;p&gt;Sylvia Tan ‘25, Selin Apaydın ‘24, Raley Long ‘25, and Simone Tricca ‘25 all worked on the AHA project, providing invaluable time and labor, even when the going got tough or really, really dull.&lt;/p&gt;&#xA;&lt;p&gt;Special thanks are due to Professor Joshua Birk, who has supported and led this project since it&amp;rsquo;s inception.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

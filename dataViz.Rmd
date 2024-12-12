@@ -1,0 +1,424 @@
+---
+title: "codeViz"
+author: "Lucy O'Brien"
+date: "2024-12-03"
+output: html_document
+---
+```{r}
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthdata)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Importing data 
+  #1975
+AHA_1975_sessions <- readxl::read_excel("AHA 1975.xlsx", sheet = "sessions")
+AHA_1975_institutions <- readxl::read_excel("AHA 1975.xlsx", sheet = "institutions")
+
+  #1970
+AHA_1970_sessions <- readxl::read_excel("AHA 1970.xlsx", sheet = "sessions")
+AHA_1970_institutions <- readxl::read_excel("AHA 1970.xlsx", sheet = "institutions")
+
+  #1980
+AHA_1980_sessions <- readxl::read_excel("AHA 1980.xlsx", sheet = "sessions")
+AHA_1980_institutions <- readxl::read_excel("AHA 1980.xlsx", sheet = "institutions")
+
+#All
+AHA_all <- readxl::read_excel("AHA 1980.xlsx", sheet = "conference_locations")
+```
+
+```{r}
+#Cleaning data
+#1970
+AHA_1970_institutions$lat <- as.numeric(AHA_1970_institutions$lat)
+
+AHA_1970_institutions$long <- as.numeric(AHA_1970_institutions$long)
+
+AHA_1970_institutions <- AHA_1970_institutions[-c(186:1312), ]
+
+AHA_1970_institutions <- AHA_1970_institutions |>
+  select(institution:long)
+
+#1975
+AHA_1975_institutions$lat <- as.numeric(AHA_1975_institutions$lat)
+
+AHA_1975_institutions$long <- as.numeric(AHA_1975_institutions$long)
+
+AHA_1975_institutions <- AHA_1975_institutions[-c(209:1312), ]
+
+#1980
+AHA_1980_institutions$lat <- as.numeric(AHA_1980_institutions$lat)
+
+AHA_1980_institutions$long <- as.numeric(AHA_1980_institutions$long)
+```
+
+```{r}
+#Calculating Distance
+#1970
+AHA_1970_dist <- AHA_1970_institutions |>
+  drop_na(lat)
+
+for(i in 1:nrow(AHA_1970_dist)){
+  AHA_1970_dist$distance[i] <- 
+    3963.0 * acos((sin(AHA_1970_dist$lat[i]/57.29577951)*sin(42.36/57.29577951)) +
+                    cos(AHA_1970_dist$lat[i]/57.29577951)*cos(42.36/57.29577951)*
+                    cos(-71.05/57.29577951 - AHA_1970_dist$long[i]/57.29577951))
+}
+  
+AHA_1970_dist$distance[is.nan(AHA_1970_dist$distance)]<-NA
+AHA_1970_dist$distance[is.na(AHA_1970_dist$distance)] <- 0
+
+#1975
+AHA_1975_dist <- AHA_1975_institutions |>
+  drop_na(lat)
+
+for(i in 1:nrow(AHA_1975_dist)){
+  AHA_1975_dist$distance[i] <- 
+    3963.0 * acos((sin(AHA_1975_dist$lat[i]/57.29577951)*sin(33.74/57.29577951)) +
+                    cos(AHA_1975_dist$lat[i]/57.29577951)*cos(33.7/57.29577951)*
+                    cos(-84.39/57.29577951 - AHA_1975_dist$long[i]/57.29577951))
+}
+  
+AHA_1975_dist$distance[is.nan(AHA_1975_dist$distance)]<-NA
+AHA_1975_dist$distance[is.na(AHA_1975_dist$distance)] <- 1
+
+#1980
+AHA_1980_dist <- AHA_1980_institutions |>
+  drop_na(lat)
+
+for(i in 1:nrow(AHA_1980_dist)){
+  AHA_1980_dist$distance[i] <- 
+    3963.0 * acos((sin(AHA_1980_dist$lat[i]/57.29577951)*sin(38.9/57.29577951)) +
+                    cos(AHA_1980_dist$lat[i]/57.29577951)*cos(38.9/57.29577951)*
+                    cos(-77.03/57.29577951 - AHA_1980_dist$long[i]/57.29577951))
+}
+  
+AHA_1980_dist$distance[is.nan(AHA_1980_dist$distance)]<-NA
+AHA_1980_dist$distance[is.na(AHA_1980_dist$distance)] <- 0
+```
+
+```{r}
+#States represented
+#1970
+AHA_1970_dist |>
+  filter(country == "USA") |>
+  summarize(unique(state)) |>
+  nrow()
+
+#1975
+AHA_1975_dist |>
+  filter(country == "USA") |>
+  summarize(unique(state)) |>
+  nrow()
+
+#1980
+AHA_1980_dist |>
+  filter(country == "USA") |>
+  summarize(unique(state)) |>
+  nrow()
+```
+```{r}
+states_df <- data.frame(year = c(1970, 1975, 1980), states_rep = c(40, 42, 27))
+
+ggplot() + geom_col(data = states_df, aes(x = year, y = states_rep))
+```
+
+
+```{r}
+#Countries represented, not USA
+#1970
+AHA_1970_dist |>
+  filter(country != "USA") |>
+  summarize(unique(country)) |>
+  nrow()
+
+#1975
+AHA_1975_dist |>
+  filter(country != "USA") |>
+  summarize(unique(country)) |>
+  nrow()
+
+#1980
+AHA_1980_dist |>
+  filter(country != "USA") |>
+  summarize(unique(country)) |>
+  nrow()
+```
+
+```{r}
+#Median distance
+#1970
+AHA_1970_dist |>
+  summarize(median(distance))
+
+#1975
+AHA_1975_dist |>
+  summarize(median(distance))
+
+#1980
+AHA_1980_dist |>
+  summarize(median(distance))
+```
+
+```{r}
+median_df <- data.frame(year = c(1970, 1975, 1980), median = c(563.107, 709.3139, 405.2696))
+
+ggplot() + geom_col(data = median_df, aes(x = year, y = median))
+```
+
+
+
+
+```{r}
+#Metro area
+#Boston, MA
+AHA_1970_dist |>
+  filter(distance <= 55) |>
+  summarize(sum(total_sent)) 
+
+AHA_1970_institutions |>
+  summarize(sum(total_sent))
+
+(59/473)*100
+
+#Atlanta 1975
+AHA_1975_dist |>
+  filter(distance <= 85) |>
+  summarize(sum(total_sent)) |>
+  print()
+
+AHA_1975_institutions |>
+  summarize(sum(total_sent)) |>
+  print()
+
+(9/378)*100
+
+#Washington, DC
+AHA_1980_dist |>
+  filter(distance <= 55) |>
+  summarize(sum(total_sent)) |>
+  print()
+
+AHA_1980_institutions |>
+  summarize(sum(total_sent)) |>
+  print()
+
+(82/667)*100
+```
+
+```{r}
+#Percent outside of USA
+#1970
+AHA_1970_dist |>
+  filter(country != "USA") |>
+  summarize(sum(total_sent))
+
+(22/473)*100
+
+
+#1975
+AHA_1975_dist |>
+  filter(country != "USA") |>
+  summarize(sum(total_sent))
+
+(15/378)*100
+
+#1980
+AHA_1980_dist |>
+  filter(country != "USA") |>
+  summarize(sum(total_sent))
+
+(44/667)*100
+```
+
+```{r}
+#Percent from region
+#1970
+AHA_1970_dist |>
+  filter(region == "New England") |>
+  summarize(sum(total_sent))
+
+(94/473)*100
+
+#1975
+AHA_1975_institutions |>
+  filter(region == "South Atlantic") |>
+  summarise(sum(total_sent))
+
+(70/378)*100
+
+#1980
+AHA_1980_institutions |>
+  filter(region == "South Atlantic") |>
+  summarise(sum(total_sent))
+
+(142/667)
+```
+
+
+```{r}
+#Distance plot
+#1970
+ggplot(data = AHA_1970_dist, aes(x = distance)) + geom_histogram(bins = 30, fill = "#e7969c", color = "white") +
+  scale_x_log10(limits = c(NA, 10000)) +
+  theme_light() +
+  labs(title = "Average distance from host city, 1970",
+       subtitle = "Logarithmic scale",
+       x = "Distance, miles",
+       y = "Count")
+
+#1975
+ggplot(data = AHA_1975_dist, aes(x = distance)) + geom_histogram(bins = 30, fill = "#b3ffd4", color = "white") +
+  scale_x_log10(limits = c(NA, 10000)) +
+  theme_light() +
+  labs(title = "Average distance from host city, 1975",
+       subtitle = "Logarithmic scale")
+
+#1980
+ggplot(data = AHA_1980_dist, aes(x = distance)) + geom_histogram(bins = 30, fill = "#b3ffd4", color = "white") +
+  scale_x_log10(limits = c(1, 10000)) +
+  theme_light() +
+  labs(title = "Average distance from host city, 1980",
+       subtitle = "Logarithmic scale")
+```
+
+```{r}
+world <- ne_countries(scale = 'medium', type = 'map_units', returnclass = 'sf')
+
+usa <- world |>
+  filter(name == "United States of America")
+
+```
+```{r}
+#Map
+#1970
+usa_AHA_1970_dist <- AHA_1970_dist |>
+  filter(country == "USA")  |>
+  filter(institution != "Smithsonian Institution")
+
+ggplot() +
+  geom_sf(data = usa) +
+  theme_light() +
+  coord_sf(xlim = c(-130, -65), ylim = c(24, 50)) +
+  geom_point(data = usa_AHA_1970_dist, x = usa_AHA_1970_dist$long, 
+             y= usa_AHA_1970_dist$lat, size = as.numeric(usa_AHA_1970_dist$total_sent), alpha = .33) +
+  geom_point(aes(x = -71.05, y = 42.36, color = "red")) +
+  labs(x = "",
+       y = "") +
+  scale_color_discrete(guide = "none") +
+  theme(
+    panel.border = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    axis.ticks = element_blank(),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.background = element_rect(fill = "transparent", color = NA)
+  )
+
+#1975
+usa_AHA_1975_dist <- AHA_1975_dist |>
+  filter(country == "USA") |>
+  filter(institution != "Smithsonian Institution")
+
+ggplot() +
+  geom_sf(data = usa) +
+  theme_light() +
+  coord_sf(xlim = c(-130, -65), ylim = c(24, 50)) +
+  geom_point(data = usa_AHA_1975_dist, x = usa_AHA_1975_dist$long, 
+             y= usa_AHA_1975_dist$lat, size = as.numeric(usa_AHA_1975_dist$total_sent), alpha = .33) +
+  geom_point(aes(x = -84.4, y = 33.7, color = "red")) +
+  labs(x = "",
+       y = "") +
+  scale_color_discrete(guide = "none") +
+  theme(
+    panel.border = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    axis.ticks = element_blank(),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.background = element_rect(fill = "transparent", color = NA)
+  )
+
+#1980
+usa_AHA_1980_dist <- AHA_1980_dist |>
+  filter(country == "USA") |>
+  filter(institution != "Smithsonian Institution")
+
+ggplot() +
+  geom_sf(data = usa) +
+  theme_light() +
+  coord_sf(xlim = c(-130, -65), ylim = c(24, 50)) +
+  geom_point(data = usa_AHA_1980_dist, x = usa_AHA_1980_dist$long, 
+             y= usa_AHA_1980_dist$lat, size = as.numeric(usa_AHA_1980_dist$total_sent), alpha = .33) +
+  geom_point(aes(x = -77.03, y = 38.90, color = "red")) +
+  labs(x = "",
+       y = "") +
+  scale_color_discrete(guide = "none") +
+  theme(
+    panel.border = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    axis.ticks = element_blank(),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.background = element_rect(fill = "transparent", color = NA)
+  )
+```
+
+```{r}
+AHA_1975_sessions_split <- AHA_1975_sessions |>
+  select(topical_index) |> filter_all(any_vars(!is.na(.))) |>
+  separate_rows(topical_index, sep = ", ")
+```
+
+```{r}
+AHA_chart <- AHA_1975_sessions_split |>
+  group_by(topical_index) |>
+  summarize(num = n()) |>
+  arrange(desc(num)) |>
+  filter(num > 6) |>
+  add_row(topical_index = "Other", 
+          num = 129) |>
+  mutate(topical_index = paste0(topical_index, ' (', num, ')'))
+
+AHA_chart$topical_index <- with(AHA_chart, reorder(topical_index, -num))
+
+#129 others
+
+
+library(pals)
+
+ggplot(data = AHA_chart, aes(x="", y=num, fill=topical_index)) + 
+  geom_bar(stat="identity", width = 1) + 
+  coord_polar("y", start=0) + 
+  theme_void() +
+  scale_fill_manual(values=unname(stepped2())) +
+  theme(legend.title=element_blank()) +
+  labs(title = "Topics at the 1975 meeting")
+```
+
+```{r}
+topics2023 <- readxl::read_excel("2023topics.xlsx")
+
+topics2023 <- 
+  aggregate(. ~ keyword, data = topics2023, FUN = sum) |>
+  arrange(desc(count)) |>
+  filter(keyword != "history")
+
+topics2023 |>
+  head(15) |>
+  ggplot() +
+  geom_col(aes(x = reorder(keyword, count), y = count), fill = "#e7969c") +
+  theme_light() +
+  coord_flip() +
+  labs(x = "", 
+       title = "Most common keywords at the 2023 meeting") +
+  guides(fill="none")
+
+```
+

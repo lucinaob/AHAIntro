@@ -1,15 +1,12 @@
 baseurl = "/"
 languageCode = "en-US"
 title = "A Hugo website"
-theme = "apvarun/digital-garden-hugo-theme"
+theme = "hugo-lithium"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
 
-[[menu.main]]
-    name = "About"
-    url = "/about/"
 [[menu.main]]
     name = "GitHub"
     url = "https://github.com/rstudio/blogdown"
